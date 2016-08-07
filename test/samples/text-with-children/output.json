@@ -1,0 +1,15 @@
+{
+	"name": "text",
+	"attributes": {},
+	"children": [
+		"\n\thello ",
+		{
+			"name": "tspan",
+			"attributes": {},
+			"children": [
+				"world"
+			]
+		},
+		"!\n"
+	]
+}
