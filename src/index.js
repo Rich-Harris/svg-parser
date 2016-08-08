@@ -1,8 +1,14 @@
 import { locate } from 'locate-character';
 
-const validNameCharacters = /[a-zA-Z:-]/;
+const validNameCharacters = /[a-zA-Z0-9:-]/;
 const whitespace = /[\s\t\r\n]/;
 const quotemark = /['"]/;
+
+function repeat ( str, i ) {
+	let result = '';
+	while ( i-- ) result += str;
+	return result;
+}
 
 export function parse ( source ) {
 	const match = /^<\?.+?\?>/.exec( source );
@@ -16,14 +22,14 @@ export function parse ( source ) {
 
 	function error ( message ) {
 		const { line, column } = locate( source, i );
-		const before = source.slice( 0, i );
+		const before = source.slice( 0, i ).replace( /^\t+/, match => repeat( '  ', match.length ) );
 		const beforeLine = /(^|\n).*$/.exec( before )[0];
 		const after = source.slice( i );
 		const afterLine = /.*(\n|$)/.exec( after )[0];
 
-		const snippet = `${beforeLine}${afterLine}\n${ Array( beforeLine.length + 1 ).join( ' ' )}^`;
+		const snippet = `${beforeLine}${afterLine}\n${ repeat( ' ', beforeLine.length )}^`;
 
-		throw new Error( `${message} (${line}:${column}). If this is valid SVG, it's probably a bug in pathologist. Please raise an issue at https://gitlab.com/Rich-Harris/pathologist/issues – thanks!\n\n${snippet}` );
+		throw new Error( `${message} (${line}:${column}). If this is valid SVG, it's probably a bug in svg-parser. Please raise an issue at https://gitlab.com/Rich-Harris/svg-parser/issues – thanks!\n\n${snippet}` );
 	}
 
 	function neutral () {
