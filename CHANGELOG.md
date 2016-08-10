@@ -1,5 +1,9 @@
 # svg-parser changelog
 
+## 1.0.3
+
+* Prevent infinite loops on bad final closing tag
+
 ## 1.0.2
 
 * Prevent `""=true` attributes

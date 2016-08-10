@@ -1,6 +1,6 @@
 {
   "name": "svg-parser",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Create a JSON-friendly object from an SVG string",
   "main": "dist/svg-parser.umd.js",
   "jsnext:main": "dist/svg-parser.es.js",
