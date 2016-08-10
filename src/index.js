@@ -69,7 +69,7 @@ export function parse ( source ) {
 		}
 
 		let attribute;
-		while ( i < source.length && attribute = getAttribute() ) {
+		while ( i < source.length && ( attribute = getAttribute() ) ) {
 			element.attributes[ attribute.name ] = attribute.value;
 		}
 
