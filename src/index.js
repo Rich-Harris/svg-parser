@@ -43,6 +43,8 @@ export function parse ( source ) {
 		if ( source[i] === '<' ) {
 			return tag;
 		}
+
+		return neutral;
 	}
 
 	function tag () {
@@ -102,6 +104,8 @@ export function parse ( source ) {
 
 	function closingTag () {
 		const name = getName();
+
+		if ( !name ) error( 'Expected tag name' );
 
 		if ( name !== currentElement.name ) {
 			error( `Expected closing tag </${name}> to match opening tag <${currentElement.name}>` );
@@ -196,6 +200,10 @@ export function parse ( source ) {
 		if ( !state ) error( 'Unexpected character' );
 		state = state();
 		i += 1;
+	}
+
+	if ( state !== neutral ) {
+		error( 'Unexpected end of input' );
 	}
 
 	if ( root.name === 'svg' ) root.metadata = metadata;

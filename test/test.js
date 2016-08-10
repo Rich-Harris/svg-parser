@@ -3,6 +3,8 @@ const path = require( 'path' );
 const assert = require( 'assert' );
 const svgParser = require( '..' );
 
+require( 'source-map-support' ).install();
+
 const SAMPLES = path.join( __dirname, 'samples' );
 
 describe( 'svg-parser', () => {
@@ -19,5 +21,9 @@ describe( 'svg-parser', () => {
 		assert.throws( () => {
 			svgParser.parse( '<svg></svg' );
 		}, /Expected >/ );
+
+		assert.throws( () => {
+			svgParser.parse( '<svg></' );
+		}, /Unexpected end of input/ );
 	});
 });

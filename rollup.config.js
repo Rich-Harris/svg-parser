@@ -11,5 +11,6 @@ export default {
 	targets: [
 		{ format: 'es', dest: 'dist/svg-parser.es.js' },
 		{ format: 'umd', dest: 'dist/svg-parser.umd.js' }
-	]
+	],
+	sourceMap: true
 };
