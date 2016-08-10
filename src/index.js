@@ -129,6 +129,8 @@ export function parse ( source ) {
 		allowSpaces();
 
 		const name = getName();
+		if ( !name ) return null;
+
 		let value = true;
 
 		allowSpaces();
