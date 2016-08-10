@@ -14,4 +14,10 @@ describe( 'svg-parser', () => {
 			assert.deepEqual( svgParser.parse( input ), output );
 		});
 	});
+
+	it( 'errors on bad closing tags', () => {
+		assert.throws( () => {
+			svgParser.parse( '<svg></svg' );
+		}, /Expected >/ );
+	});
 });

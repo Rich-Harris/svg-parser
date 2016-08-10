@@ -69,7 +69,7 @@ export function parse ( source ) {
 		}
 
 		let attribute;
-		while ( attribute = getAttribute() ) {
+		while ( i < source.length && attribute = getAttribute() ) {
 			element.attributes[ attribute.name ] = attribute.value;
 		}
 
@@ -119,7 +119,7 @@ export function parse ( source ) {
 
 	function getName () {
 		let name = '';
-		while ( validNameCharacters.test( source[i] ) ) name += source[ i++ ];
+		while ( i < source.length && validNameCharacters.test( source[i] ) ) name += source[ i++ ];
 
 		return name;
 	}
@@ -188,7 +188,7 @@ export function parse ( source ) {
 	}
 
 	function allowSpaces () {
-		while ( whitespace.test( source[i] ) ) i += 1;
+		while ( i < source.length && whitespace.test( source[i] ) ) i += 1;
 	}
 
 	let i = metadata.length;
