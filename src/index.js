@@ -11,12 +11,10 @@ function repeat ( str, i ) {
 }
 
 export function parse ( source ) {
-	const match = /^<\?.+?\?>/.exec( source );
-	const metadata = match ? match[0] : '';
-
+	let header = '';
 	let stack = [];
 
-	let state = neutral;
+	let state = metadata;
 	let currentElement = null;
 	let root = null;
 
@@ -30,6 +28,14 @@ export function parse ( source ) {
 		const snippet = `${beforeLine}${afterLine}\n${ repeat( ' ', beforeLine.length )}^`;
 
 		throw new Error( `${message} (${line}:${column}). If this is valid SVG, it's probably a bug in svg-parser. Please raise an issue at https://gitlab.com/Rich-Harris/svg-parser/issues – thanks!\n\n${snippet}` );
+	}
+
+	function metadata () {
+		while ( i < source.length && source[i] !== '<' || !validNameCharacters.test( source[ i + 1 ] ) ) {
+			header += source[ i++ ];
+		}
+
+		return neutral();
 	}
 
 	function neutral () {
@@ -48,13 +54,16 @@ export function parse ( source ) {
 	}
 
 	function tag () {
-		if ( source[i] === '!' ) {
-			return comment;
+		const char = source[i];
+
+		if ( char === '?' ) return neutral; // <?xml...
+
+		if ( char === '!' ) {
+			if ( source.slice( i + 1, i + 3 ) === '--' ) return comment;
+			if ( /doctype/i.test( source.slice( i + 1, i + 8 ) ) ) return neutral;
 		}
 
-		if ( source[i] === '/' ) {
-			return closingTag;
-		}
+		if ( char === '/' ) return closingTag;
 
 		const name = getName();
 
@@ -206,6 +215,6 @@ export function parse ( source ) {
 		error( 'Unexpected end of input' );
 	}
 
-	if ( root.name === 'svg' ) root.metadata = metadata;
+	if ( root.name === 'svg' ) root.metadata = header;
 	return root;
 }
