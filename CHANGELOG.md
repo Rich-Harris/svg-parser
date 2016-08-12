@@ -1,5 +1,9 @@
 # svg-parser changelog
 
+## 1.0.5
+
+* Handle doctype and CDATA
+
 ## 1.0.4
 
 * Handle unexpected end of input
