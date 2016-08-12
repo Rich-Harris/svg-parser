@@ -60,6 +60,7 @@ export function parse ( source ) {
 
 		if ( char === '!' ) {
 			if ( source.slice( i + 1, i + 3 ) === '--' ) return comment;
+			if ( source.slice( i + 1, i + 8 ) === '[CDATA[' ) return cdata;
 			if ( /doctype/i.test( source.slice( i + 1, i + 8 ) ) ) return neutral;
 		}
 
@@ -107,7 +108,17 @@ export function parse ( source ) {
 		const index = source.indexOf( '-->', i );
 		if ( !~index ) error( 'expected -->' );
 
-		i = index + 3;
+		i = index + 2;
+		return neutral;
+	}
+
+	function cdata () {
+		const index = source.indexOf( ']]>', i );
+		if ( !~index ) error( 'expected ]]>' );
+
+		currentElement.children.push( source.slice( i + 7, index ) );
+
+		i = index + 2;
 		return neutral;
 	}
 
