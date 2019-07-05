@@ -1,5 +1,9 @@
 # svg-parser changelog
 
+## 1.0.6
+
+* Remove unused dependency
+
 ## 1.0.5
 
 * Handle doctype and CDATA
