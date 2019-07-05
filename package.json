@@ -34,13 +34,11 @@
   "homepage": "https://gitlab.com/Rich-Harris/svg-parser#README",
   "devDependencies": {
     "eslint": "^3.2.2",
+    "locate-character": "^2.0.5",
     "mocha": "^3.0.1",
     "rollup": "^0.34.7",
     "rollup-plugin-buble": "^0.12.1",
     "rollup-plugin-node-resolve": "^2.0.0",
     "source-map-support": "^0.4.2"
-  },
-  "dependencies": {
-    "locate-character": "^1.0.0"
   }
 }
