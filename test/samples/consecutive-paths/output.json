@@ -1,33 +1,38 @@
 {
-	"name": "svg",
-	"metadata": "",
-	"attributes": {
-		"viewBox": "0 0 50 10"
-	},
+	"type": "root",
 	"children": [
 		{
-			"name": "path",
+			"name": "svg",
+			"metadata": "",
 			"attributes": {
-				"d": "M0 0L10 0 10 10 0 10 Z",
-				"fill": "green"
+				"viewBox": "0 0 50 10"
 			},
-			"children": []
-		},
-		{
-			"name": "path",
-			"attributes": {
-				"d": "M20 0L30 0 30 10 20 10 Z",
-				"fill": "blue"
-			},
-			"children": []
-		},
-		{
-			"name": "path",
-			"attributes": {
-				"d": "M40 0L50 0 50 10 40 10 Z",
-				"fill": "red"
-			},
-			"children": []
+			"children": [
+				{
+					"name": "path",
+					"attributes": {
+						"d": "M0 0L10 0 10 10 0 10 Z",
+						"fill": "green"
+					},
+					"children": []
+				},
+				{
+					"name": "path",
+					"attributes": {
+						"d": "M20 0L30 0 30 10 20 10 Z",
+						"fill": "blue"
+					},
+					"children": []
+				},
+				{
+					"name": "path",
+					"attributes": {
+						"d": "M40 0L50 0 50 10 40 10 Z",
+						"fill": "red"
+					},
+					"children": []
+				}
+			]
 		}
 	]
 }

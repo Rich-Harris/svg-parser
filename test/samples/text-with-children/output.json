@@ -1,15 +1,18 @@
 {
-	"name": "text",
-	"attributes": {},
+	"type": "root",
 	"children": [
-		"\n\thello ",
 		{
-			"name": "tspan",
+			"name": "text",
 			"attributes": {},
 			"children": [
-				"world"
+				"\n\thello ",
+				{
+					"name": "tspan",
+					"attributes": {},
+					"children": ["world"]
+				},
+				"!\n"
 			]
-		},
-		"!\n"
+		}
 	]
 }

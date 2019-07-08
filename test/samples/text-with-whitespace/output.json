@@ -1,7 +1,10 @@
 {
-	"name": "text",
-	"attributes": {},
+	"type": "root",
 	"children": [
-		"\n\thello world!\n"
+		{
+			"name": "text",
+			"attributes": {},
+			"children": ["\n\thello world!\n"]
+		}
 	]
 }

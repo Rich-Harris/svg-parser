@@ -1,10 +1,15 @@
 {
-	"name": "line",
-	"attributes": {
-		"x1": 0,
-		"y1": 0,
-		"x2": 10,
-		"y2": 0
-	},
-	"children": []
+	"type": "root",
+	"children": [
+		{
+			"name": "line",
+			"attributes": {
+				"x1": 0,
+				"y1": 0,
+				"x2": 10,
+				"y2": 0
+			},
+			"children": []
+		}
+	]
 }

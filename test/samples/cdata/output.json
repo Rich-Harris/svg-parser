@@ -1,19 +1,24 @@
 {
-	"name": "svg",
-	"metadata": "",
-	"attributes": {},
+	"type": "root",
 	"children": [
 		{
-			"name": "defs",
+			"name": "svg",
+			"metadata": "",
 			"attributes": {},
 			"children": [
 				{
-					"name": "style",
-					"attributes": {
-						"type": "text/css"
-					},
+					"name": "defs",
+					"attributes": {},
 					"children": [
-						"\n\t\t\trect {\n\t\t\t\tfill: red;\n\t\t\t\tstroke: blue;\n\t\t\t\tstroke-width: 3\n\t\t\t}\n\t\t\t"
+						{
+							"name": "style",
+							"attributes": {
+								"type": "text/css"
+							},
+							"children": [
+								"\n\t\t\trect {\n\t\t\t\tfill: red;\n\t\t\t\tstroke: blue;\n\t\t\t\tstroke-width: 3\n\t\t\t}\n\t\t\t"
+							]
+						}
 					]
 				}
 			]

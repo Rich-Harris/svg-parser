@@ -1,16 +1,21 @@
 {
-	"metadata": "<?xml version=\"1.0\" standalone=\"yes\"?>\n",
-	"name": "svg",
-	"attributes": {
-		"xmlns": "http://www.w3.org/2000/svg"
-	},
+	"type": "root",
 	"children": [
 		{
-			"name": "path",
+			"metadata": "<?xml version=\"1.0\" standalone=\"yes\"?>\n",
+			"name": "svg",
 			"attributes": {
-				"d": "M0,0 L10,0 L10,10 L0,10Z"
+				"xmlns": "http://www.w3.org/2000/svg"
 			},
-			"children": []
+			"children": [
+				{
+					"name": "path",
+					"attributes": {
+						"d": "M0,0 L10,0 L10,10 L0,10Z"
+					},
+					"children": []
+				}
+			]
 		}
 	]
 }

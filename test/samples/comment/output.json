@@ -1,5 +1,10 @@
 {
-	"name": "g",
-	"attributes": {},
-	"children": []
+	"type": "root",
+	"children": [
+		{
+			"name": "g",
+			"attributes": {},
+			"children": []
+		}
+	]
 }

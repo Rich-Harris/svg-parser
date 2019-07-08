@@ -227,5 +227,8 @@ export function parse(source) {
 	}
 
 	if (root.name === 'svg') root.metadata = header;
-	return root;
+	return {
+		type: 'root',
+		children: [root]
+	};
 }
