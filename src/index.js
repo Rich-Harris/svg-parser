@@ -4,13 +4,13 @@ const validNameCharacters = /[a-zA-Z0-9:-]/;
 const whitespace = /[\s\t\r\n]/;
 const quotemark = /['"]/;
 
-function repeat ( str, i ) {
+function repeat(str, i) {
 	let result = '';
-	while ( i-- ) result += str;
+	while (i--) result += str;
 	return result;
 }
 
-export function parse ( source ) {
+export function parse(source) {
 	let header = '';
 	let stack = [];
 
@@ -18,53 +18,55 @@ export function parse ( source ) {
 	let currentElement = null;
 	let root = null;
 
-	function error ( message ) {
-		const { line, column } = locate( source, i );
-		const before = source.slice( 0, i ).replace( /^\t+/, match => repeat( '  ', match.length ) );
-		const beforeLine = /(^|\n).*$/.exec( before )[0];
-		const after = source.slice( i );
-		const afterLine = /.*(\n|$)/.exec( after )[0];
+	function error(message) {
+		const { line, column } = locate(source, i);
+		const before = source.slice(0, i).replace(/^\t+/, match => repeat('  ', match.length));
+		const beforeLine = /(^|\n).*$/.exec(before)[0];
+		const after = source.slice(i);
+		const afterLine = /.*(\n|$)/.exec(after)[0];
 
-		const snippet = `${beforeLine}${afterLine}\n${ repeat( ' ', beforeLine.length )}^`;
+		const snippet = `${beforeLine}${afterLine}\n${repeat(' ', beforeLine.length)}^`;
 
-		throw new Error( `${message} (${line}:${column}). If this is valid SVG, it's probably a bug in svg-parser. Please raise an issue at https://gitlab.com/Rich-Harris/svg-parser/issues – thanks!\n\n${snippet}` );
+		throw new Error(
+			`${message} (${line}:${column}). If this is valid SVG, it's probably a bug in svg-parser. Please raise an issue at https://gitlab.com/Rich-Harris/svg-parser/issues – thanks!\n\n${snippet}`
+		);
 	}
 
-	function metadata () {
-		while ( i < source.length && source[i] !== '<' || !validNameCharacters.test( source[ i + 1 ] ) ) {
-			header += source[ i++ ];
+	function metadata() {
+		while ((i < source.length && source[i] !== '<') || !validNameCharacters.test(source[i + 1])) {
+			header += source[i++];
 		}
 
 		return neutral();
 	}
 
-	function neutral () {
+	function neutral() {
 		let text = '';
-		while ( i < source.length && source[i] !== '<' ) text += source[ i++ ];
+		while (i < source.length && source[i] !== '<') text += source[i++];
 
-		if ( /\S/.test( text ) ) {
-			currentElement.children.push( text );
+		if (/\S/.test(text)) {
+			currentElement.children.push(text);
 		}
 
-		if ( source[i] === '<' ) {
+		if (source[i] === '<') {
 			return tag;
 		}
 
 		return neutral;
 	}
 
-	function tag () {
+	function tag() {
 		const char = source[i];
 
-		if ( char === '?' ) return neutral; // <?xml...
+		if (char === '?') return neutral; // <?xml...
 
-		if ( char === '!' ) {
-			if ( source.slice( i + 1, i + 3 ) === '--' ) return comment;
-			if ( source.slice( i + 1, i + 8 ) === '[CDATA[' ) return cdata;
-			if ( /doctype/i.test( source.slice( i + 1, i + 8 ) ) ) return neutral;
+		if (char === '!') {
+			if (source.slice(i + 1, i + 3) === '--') return comment;
+			if (source.slice(i + 1, i + 8) === '[CDATA[') return cdata;
+			if (/doctype/i.test(source.slice(i + 1, i + 8))) return neutral;
 		}
 
-		if ( char === '/' ) return closingTag;
+		if (char === '/') return closingTag;
 
 		const name = getName();
 
@@ -74,135 +76,133 @@ export function parse ( source ) {
 			children: []
 		};
 
-		if ( currentElement ) {
-			currentElement.children.push( element );
+		if (currentElement) {
+			currentElement.children.push(element);
 		} else {
 			root = element;
 		}
 
 		let attribute;
-		while ( i < source.length && ( attribute = getAttribute() ) ) {
-			element.attributes[ attribute.name ] = attribute.value;
+		while (i < source.length && (attribute = getAttribute())) {
+			element.attributes[attribute.name] = attribute.value;
 		}
 
 		let selfClosing = false;
 
-		if ( source[i] === '/' ) {
+		if (source[i] === '/') {
 			i += 1;
 			selfClosing = true;
 		}
 
-		if ( source[i] !== '>' ) {
-			error( 'Expected >' );
+		if (source[i] !== '>') {
+			error('Expected >');
 		}
 
-		if ( !selfClosing ) {
+		if (!selfClosing) {
 			currentElement = element;
-			stack.push( element );
+			stack.push(element);
 		}
 
 		return neutral;
 	}
 
-	function comment () {
-		const index = source.indexOf( '-->', i );
-		if ( !~index ) error( 'expected -->' );
+	function comment() {
+		const index = source.indexOf('-->', i);
+		if (!~index) error('expected -->');
 
 		i = index + 2;
 		return neutral;
 	}
 
-	function cdata () {
-		const index = source.indexOf( ']]>', i );
-		if ( !~index ) error( 'expected ]]>' );
+	function cdata() {
+		const index = source.indexOf(']]>', i);
+		if (!~index) error('expected ]]>');
 
-		currentElement.children.push( source.slice( i + 7, index ) );
+		currentElement.children.push(source.slice(i + 7, index));
 
 		i = index + 2;
 		return neutral;
 	}
 
-	function closingTag () {
+	function closingTag() {
 		const name = getName();
 
-		if ( !name ) error( 'Expected tag name' );
+		if (!name) error('Expected tag name');
 
-		if ( name !== currentElement.name ) {
-			error( `Expected closing tag </${name}> to match opening tag <${currentElement.name}>` );
+		if (name !== currentElement.name) {
+			error(`Expected closing tag </${name}> to match opening tag <${currentElement.name}>`);
 		}
 
-		if ( source[i] !== '>' ) {
-			error( 'Expected >' );
+		if (source[i] !== '>') {
+			error('Expected >');
 		}
 
 		stack.pop();
-		currentElement = stack[ stack.length - 1 ];
+		currentElement = stack[stack.length - 1];
 
 		return neutral;
 	}
 
-	function getName () {
+	function getName() {
 		let name = '';
-		while ( i < source.length && validNameCharacters.test( source[i] ) ) name += source[ i++ ];
+		while (i < source.length && validNameCharacters.test(source[i])) name += source[i++];
 
 		return name;
 	}
 
-	function getAttribute () {
-		if ( !whitespace.test( source[i] ) ) return null;
+	function getAttribute() {
+		if (!whitespace.test(source[i])) return null;
 		allowSpaces();
 
 		const name = getName();
-		if ( !name ) return null;
+		if (!name) return null;
 
 		let value = true;
 
 		allowSpaces();
-		if ( source[i] === '=' ) {
+		if (source[i] === '=') {
 			i += 1;
 			allowSpaces();
 
 			value = getAttributeValue();
-			if ( !isNaN( value ) ) value = +value; // TODO whitelist numeric attributes?
+			if (!isNaN(value)) value = +value; // TODO whitelist numeric attributes?
 		}
 
 		return { name, value };
 	}
 
-	function getAttributeValue () {
-		return quotemark.test( source[i] ) ?
-			getQuotedAttributeValue() :
-			getUnquotedAttributeValue();
+	function getAttributeValue() {
+		return quotemark.test(source[i]) ? getQuotedAttributeValue() : getUnquotedAttributeValue();
 	}
 
-	function getUnquotedAttributeValue () {
+	function getUnquotedAttributeValue() {
 		let value = '';
 		do {
 			const char = source[i];
-			if ( char === ' ' || char === '>' || char === '/' ) {
+			if (char === ' ' || char === '>' || char === '/') {
 				return value;
 			}
 
 			value += char;
 			i += 1;
-		} while ( i < source.length );
+		} while (i < source.length);
 
 		return value;
 	}
 
-	function getQuotedAttributeValue () {
-		const quotemark = source[ i++ ];
+	function getQuotedAttributeValue() {
+		const quotemark = source[i++];
 
 		let value = '';
 		let escaped = false;
 
-		while ( i < source.length ) {
-			const char = source[ i++ ];
-			if ( char === quotemark && !escaped ) {
+		while (i < source.length) {
+			const char = source[i++];
+			if (char === quotemark && !escaped) {
 				return value;
 			}
 
-			if ( char === '\\' && !escaped ) {
+			if (char === '\\' && !escaped) {
 				escaped = true;
 			}
 
@@ -211,21 +211,21 @@ export function parse ( source ) {
 		}
 	}
 
-	function allowSpaces () {
-		while ( i < source.length && whitespace.test( source[i] ) ) i += 1;
+	function allowSpaces() {
+		while (i < source.length && whitespace.test(source[i])) i += 1;
 	}
 
 	let i = metadata.length;
-	while ( i < source.length ) {
-		if ( !state ) error( 'Unexpected character' );
+	while (i < source.length) {
+		if (!state) error('Unexpected character');
 		state = state();
 		i += 1;
 	}
 
-	if ( state !== neutral ) {
-		error( 'Unexpected end of input' );
+	if (state !== neutral) {
+		error('Unexpected end of input');
 	}
 
-	if ( root.name === 'svg' ) root.metadata = header;
+	if (root.name === 'svg') root.metadata = header;
 	return root;
 }
