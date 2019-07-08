@@ -4,7 +4,12 @@
 		{
 			"name": "text",
 			"attributes": {},
-			"children": ["\n\thello world!\n"]
+			"children": [
+				{
+					"type": "text",
+					"value": "\n\thello world!\n"
+				}
+			]
 		}
 	]
 }

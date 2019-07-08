@@ -45,7 +45,7 @@ export function parse(source) {
 		while (i < source.length && source[i] !== '<') text += source[i++];
 
 		if (/\S/.test(text)) {
-			currentElement.children.push(text);
+			currentElement.children.push({ type: 'text', value: text });
 		}
 
 		if (source[i] === '<') {

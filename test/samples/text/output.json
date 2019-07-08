@@ -4,7 +4,12 @@
 		{
 			"name": "text",
 			"attributes": {},
-			"children": ["hello world!"]
+			"children": [
+				{
+					"type": "text",
+					"value": "hello world!"
+				}
+			]
 		}
 	]
 }

@@ -5,13 +5,24 @@
 			"name": "text",
 			"attributes": {},
 			"children": [
-				"\n\thello ",
+				{
+					"type": "text",
+					"value": "\n\thello "
+				},
 				{
 					"name": "tspan",
 					"attributes": {},
-					"children": ["world"]
+					"children": [
+						{
+							"type": "text",
+							"value": "world"
+						}
+					]
 				},
-				"!\n"
+				{
+					"type": "text",
+					"value": "!\n"
+				}
 			]
 		}
 	]
