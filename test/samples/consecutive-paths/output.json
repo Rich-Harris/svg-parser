@@ -2,31 +2,35 @@
 	"type": "root",
 	"children": [
 		{
-			"name": "svg",
+			"type": "element",
+			"tagName": "svg",
 			"metadata": "",
-			"attributes": {
+			"properties": {
 				"viewBox": "0 0 50 10"
 			},
 			"children": [
 				{
-					"name": "path",
-					"attributes": {
+					"type": "element",
+					"tagName": "path",
+					"properties": {
 						"d": "M0 0L10 0 10 10 0 10 Z",
 						"fill": "green"
 					},
 					"children": []
 				},
 				{
-					"name": "path",
-					"attributes": {
+					"type": "element",
+					"tagName": "path",
+					"properties": {
 						"d": "M20 0L30 0 30 10 20 10 Z",
 						"fill": "blue"
 					},
 					"children": []
 				},
 				{
-					"name": "path",
-					"attributes": {
+					"type": "element",
+					"tagName": "path",
+					"properties": {
 						"d": "M40 0L50 0 50 10 40 10 Z",
 						"fill": "red"
 					},

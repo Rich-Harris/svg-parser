@@ -68,11 +68,12 @@ export function parse(source) {
 
 		if (char === '/') return closingTag;
 
-		const name = getName();
+		const tagName = getName();
 
 		const element = {
-			name,
-			attributes: {},
+			type: 'element',
+			tagName,
+			properties: {},
 			children: []
 		};
 
@@ -84,7 +85,7 @@ export function parse(source) {
 
 		let attribute;
 		while (i < source.length && (attribute = getAttribute())) {
-			element.attributes[attribute.name] = attribute.value;
+			element.properties[attribute.name] = attribute.value;
 		}
 
 		let selfClosing = false;
@@ -125,12 +126,12 @@ export function parse(source) {
 	}
 
 	function closingTag() {
-		const name = getName();
+		const tagName = getName();
 
-		if (!name) error('Expected tag name');
+		if (!tagName) error('Expected tag name');
 
-		if (name !== currentElement.name) {
-			error(`Expected closing tag </${name}> to match opening tag <${currentElement.name}>`);
+		if (tagName !== currentElement.tagName) {
+			error(`Expected closing tag </${tagName}> to match opening tag <${currentElement.tagName}>`);
 		}
 
 		if (source[i] !== '>') {
@@ -226,7 +227,7 @@ export function parse(source) {
 		error('Unexpected end of input');
 	}
 
-	if (root.name === 'svg') root.metadata = header;
+	if (root.tagName === 'svg') root.metadata = header;
 	return {
 		type: 'root',
 		children: [root]

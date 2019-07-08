@@ -2,8 +2,9 @@
 	"type": "root",
 	"children": [
 		{
-			"name": "line",
-			"attributes": {
+			"type": "element",
+			"tagName": "line",
+			"properties": {
 				"x1": 0,
 				"y1": 0,
 				"x2": 10,

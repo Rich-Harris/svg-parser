@@ -2,8 +2,9 @@
 	"type": "root",
 	"children": [
 		{
-			"name": "path",
-			"attributes": {
+			"type": "element",
+			"tagName": "path",
+			"properties": {
 				"d": "M0,0 L10,0 L10,10 L0,10Z"
 			},
 			"children": []

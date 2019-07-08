@@ -2,17 +2,20 @@
 	"type": "root",
 	"children": [
 		{
-			"name": "svg",
+			"type": "element",
+			"tagName": "svg",
 			"metadata": "",
-			"attributes": {},
+			"properties": {},
 			"children": [
 				{
-					"name": "defs",
-					"attributes": {},
+					"type": "element",
+					"tagName": "defs",
+					"properties": {},
 					"children": [
 						{
-							"name": "style",
-							"attributes": {
+							"type": "element",
+							"tagName": "style",
+							"properties": {
 								"type": "text/css"
 							},
 							"children": [

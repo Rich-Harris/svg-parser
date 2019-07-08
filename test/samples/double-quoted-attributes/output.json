@@ -2,8 +2,9 @@
 	"type": "root",
 	"children": [
 		{
-			"name": "rect",
-			"attributes": {
+			"type": "element",
+			"tagName": "rect",
+			"properties": {
 				"x": 0,
 				"y": 0,
 				"width": 100,

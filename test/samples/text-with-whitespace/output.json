@@ -2,8 +2,9 @@
 	"type": "root",
 	"children": [
 		{
-			"name": "text",
-			"attributes": {},
+			"type": "element",
+			"tagName": "text",
+			"properties": {},
 			"children": [
 				{
 					"type": "text",

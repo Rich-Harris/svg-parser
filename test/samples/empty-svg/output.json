@@ -2,9 +2,10 @@
 	"type": "root",
 	"children": [
 		{
+			"type": "element",
+			"tagName": "svg",
 			"metadata": "",
-			"name": "svg",
-			"attributes": {},
+			"properties": {},
 			"children": []
 		}
 	]
