@@ -1,15 +1,31 @@
 {
-	"name": "text",
-	"attributes": {},
+	"type": "root",
 	"children": [
-		"\n\thello ",
 		{
-			"name": "tspan",
-			"attributes": {},
+			"type": "element",
+			"tagName": "text",
+			"properties": {},
 			"children": [
-				"world"
+				{
+					"type": "text",
+					"value": "\n\thello "
+				},
+				{
+					"type": "element",
+					"tagName": "tspan",
+					"properties": {},
+					"children": [
+						{
+							"type": "text",
+							"value": "world"
+						}
+					]
+				},
+				{
+					"type": "text",
+					"value": "!\n"
+				}
 			]
-		},
-		"!\n"
+		}
 	]
 }
