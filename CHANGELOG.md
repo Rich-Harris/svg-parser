@@ -1,5 +1,9 @@
 # svg-parser changelog
 
+## 2.0.0
+
+* Migrate to HAST
+
 ## 1.0.6
 
 * Remove unused dependency

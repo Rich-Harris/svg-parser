@@ -1,6 +1,6 @@
 # svg-parser
 
-Take a string representing an SVG document or fragment, turn it into a plain old JavaScript object.
+Take a string representing an SVG document or fragment, turn it into [HAST](https://github.com/syntax-tree/hast) JavaScript object.
 
 
 ## Installation
@@ -18,7 +18,21 @@ const parsed = parse( `
 		<!-- stuff goes here... -->
 	</svg>
 ` );
-// { name: 'svg', attributes: { viewBox: '0 0 100 100' }, children: [...] }
+/*
+{
+  type: 'root',
+  children: [
+    {
+      type: 'element',
+      tagName: 'svg',
+      properties: {
+        viewBox: '0 0 100 100'
+      },
+      children: [...]
+    }
+  ]
+}
+*/
 ```
 
 
