@@ -166,7 +166,7 @@ export function parse(source) {
 			allowSpaces();
 
 			value = getAttributeValue();
-			if (!isNaN(value)) value = +value; // TODO whitelist numeric attributes?
+			if (!isNaN(value) && value.trim() !== '') value = +value; // TODO whitelist numeric attributes?
 		}
 
 		return { name, value };

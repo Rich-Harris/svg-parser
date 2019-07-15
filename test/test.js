@@ -13,7 +13,7 @@ describe( 'svg-parser', () => {
 			const input = fs.readFileSync( path.join( SAMPLES, dir, 'input.svg' ), 'utf-8' );
 			const output = JSON.parse( fs.readFileSync( path.join( SAMPLES, dir, 'output.json' ), 'utf-8' ) );
 
-			assert.deepEqual( svgParser.parse( input ), output );
+			assert.deepStrictEqual( svgParser.parse( input ), output );
 		});
 	});
 
