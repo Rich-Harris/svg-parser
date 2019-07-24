@@ -1,6 +1,6 @@
 import { locate } from 'locate-character';
 
-const validNameCharacters = /[a-zA-Z0-9:-]/;
+const validNameCharacters = /[a-zA-Z0-9:_-]/;
 const whitespace = /[\s\t\r\n]/;
 const quotemark = /['"]/;
 
