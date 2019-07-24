@@ -23,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/Rich-Harris/svg-parser.git"
+    "url": "git+https://github.com/Rich-Harris/svg-parser.git"
   },
   "keywords": [
     "SVG",
@@ -34,9 +34,9 @@
   "author": "Rich Harris",
   "license": "MIT",
   "bugs": {
-    "url": "https://gitlab.com/Rich-Harris/svg-parser/issues"
+    "url": "https://github.com/Rich-Harris/svg-parser/issues"
   },
-  "homepage": "https://gitlab.com/Rich-Harris/svg-parser#README",
+  "homepage": "https://github.com/Rich-Harris/svg-parser#README",
   "devDependencies": {
     "eslint": "^3.2.2",
     "locate-character": "^2.0.5",
