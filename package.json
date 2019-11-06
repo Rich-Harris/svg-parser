@@ -38,7 +38,7 @@
   },
   "homepage": "https://github.com/Rich-Harris/svg-parser#README",
   "devDependencies": {
-    "eslint": "^3.2.2",
+    "eslint": "^4.18.2",
     "locate-character": "^2.0.5",
     "mocha": "^3.0.1",
     "prettier": "^1.18.2",
