@@ -1,5 +1,17 @@
 # svg-parser changelog
 
+## 2.0.3
+
+* Fix reported error location ([#9](https://github.com/Rich-Harris/svg-parser/issues/9))
+
+## 2.0.2
+
+* Allow underscores in attribute names ([#4](https://github.com/Rich-Harris/svg-parser/issues/4))
+
+## 2.0.1
+
+* Fix empty/space attributes
+
 ## 2.0.0
 
 * Migrate to HAST
