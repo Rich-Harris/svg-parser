@@ -3,15 +3,15 @@
   "version": "2.0.2",
   "description": "Create a JSON-friendly object from an SVG string",
   "main": "dist/svg-parser.umd.js",
-  "jsnext:main": "dist/svg-parser.es.js",
-  "module": "dist/svg-parser.es.js",
+  "jsnext:main": "dist/svg-parser.esm.js",
+  "module": "dist/svg-parser.esm.js",
   "files": [
     "dist",
     "README.md"
   ],
   "scripts": {
     "test": "mocha",
-    "build": "rollup -c",
+    "build": "rm -rf dist && rollup -c",
     "pretest": "npm run build",
     "prepublish": "npm run lint && npm test",
     "lint": "eslint src"
@@ -38,13 +38,13 @@
   },
   "homepage": "https://github.com/Rich-Harris/svg-parser#README",
   "devDependencies": {
+    "@rollup/plugin-buble": "^0.21.0",
+    "@rollup/plugin-node-resolve": "^7.0.0",
     "eslint": "^3.2.2",
     "locate-character": "^2.0.5",
     "mocha": "^3.0.1",
     "prettier": "^1.18.2",
-    "rollup": "^0.34.7",
-    "rollup-plugin-buble": "^0.12.1",
-    "rollup-plugin-node-resolve": "^2.0.0",
+    "rollup": "^1.29.0",
     "source-map-support": "^0.4.2"
   }
 }

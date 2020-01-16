@@ -1,16 +1,11 @@
-import buble from 'rollup-plugin-buble';
-import nodeResolve from 'rollup-plugin-node-resolve';
+import buble from '@rollup/plugin-buble';
+import nodeResolve from '@rollup/plugin-node-resolve';
 
 export default {
-	entry: 'src/index.js',
-	moduleName: 'svgParser',
-	plugins: [
-		nodeResolve(),
-		buble({ include: 'src/**' })
+	input: 'src/index.js',
+	output: [
+		{ format: 'esm', file: 'dist/svg-parser.esm.js', sourcemap: true },
+		{ format: 'umd', file: 'dist/svg-parser.umd.js', name: 'svgParser', sourcemap: true }
 	],
-	targets: [
-		{ format: 'es', dest: 'dist/svg-parser.es.js' },
-		{ format: 'umd', dest: 'dist/svg-parser.umd.js' }
-	],
-	sourceMap: true
+	plugins: [nodeResolve(), buble({ include: 'src/**' })]
 };
