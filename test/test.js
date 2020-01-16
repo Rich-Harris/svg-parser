@@ -26,4 +26,10 @@ describe( 'svg-parser', () => {
 			svgParser.parse( '<svg></' );
 		}, /Unexpected end of input/ );
 	});
+
+  it('replace tabs with spaces to show correct position in the line', () => {
+		assert.throws(() => {
+			svgParser.parse( '<svg>\n\t\t<path\td=" class="" />\n</svg>' );
+    }, /\n    <path  d=/);
+  })
 });

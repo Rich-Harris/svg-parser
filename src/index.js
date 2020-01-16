@@ -20,8 +20,8 @@ export function parse(source) {
 
 	function error(message) {
 		const { line, column } = locate(source, i);
-		const before = source.slice(0, i).replace(/^\t+/, match => repeat('  ', match.length));
-		const beforeLine = /(^|\n).*$/.exec(before)[0];
+		const before = source.slice(0, i);
+		const beforeLine = /(^|\n).*$/.exec(before)[0].replace(/\t/g, '  ');
 		const after = source.slice(i);
 		const afterLine = /.*(\n|$)/.exec(after)[0];
 
