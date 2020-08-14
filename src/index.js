@@ -1,6 +1,7 @@
 import { locate } from 'locate-character';
 
-const validNameCharacters = /[a-zA-Z0-9:_-]/;
+const validNameCharacters = /[a-zA-Z0-9:_-]/; // Valid characters within an XML tag's name
+const validNameStartCharacters = /[a-zA-Z:_]/; // Valid starting characters for an XML tag's name
 const whitespace = /[\s\t\r\n]/;
 const quotemark = /['"]/;
 
@@ -33,7 +34,20 @@ export function parse(source) {
 	}
 
 	function metadata() {
-		while ((i < source.length && source[i] !== '<') || !validNameCharacters.test(source[i + 1])) {
+		// Need to check for comments in the metadata section, as they can legally contain <tags>
+		while (i < source.length) {
+			if (source.slice(i, i+4) === '<!--') {
+				// If we find a comment in the header section, copy all of it and continue processing
+				let commentEnd = source.indexOf('-->', i+3);
+				if (!~commentEnd) {
+					error('expected -->');
+				}
+				header += source.slice(i, commentEnd);
+				i = commentEnd;
+			} else if (i < source.length-1 && source[i] === '<' && validNameStartCharacters.test(source[i+1])) {
+				// If we find a valid tag (not inside a comment) then we've reached the end of the header
+				break;
+			}
 			header += source[i++];
 		}
 
@@ -108,10 +122,24 @@ export function parse(source) {
 	}
 
 	function comment() {
-		const index = source.indexOf('-->', i);
-		if (!~index) error('expected -->');
+		let commentEnd = source.indexOf('-->', i);
+		if (!~commentEnd) {
+			error('expected -->');
+		}
 
-		i = index + 2;
+		let comment = {
+			type: 'comment',
+			value: source.slice(i+2, commentEnd)
+		};
+
+		if (currentElement) {
+			currentElement.children.push(comment);
+		} else {
+			// Ignoring a comment that is outside an element
+			// This will be handled by metadata if it's before the root element, or silently ignored if it's after
+		}
+
+		i = commentEnd + 2;
 		return neutral;
 	}
 
