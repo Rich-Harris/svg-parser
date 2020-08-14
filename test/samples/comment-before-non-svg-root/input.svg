@@ -1,0 +1,5 @@
+<!-- pre-root-element comment - ignored as the root element is not svg -->
+<g>
+	<!-- this comment will be loaded as a hast comment node -->
+</g>
+<!-- post-root-element comment - silently ignored -->
