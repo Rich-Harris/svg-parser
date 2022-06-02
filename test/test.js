@@ -32,4 +32,12 @@ describe( 'svg-parser', () => {
 			svgParser.parse( '<svg>\n\t\t<path\td=" class="" />\n</svg>' );
     }, /\n    <path  d=/);
   })
+	it('options disableConversionToNumber', () => {
+		const dir = 'attribute-with-number';
+		const input = fs.readFileSync(path.join(SAMPLES, dir, 'input.svg'), 'utf-8');
+
+		const output = JSON.parse(fs.readFileSync(path.join(SAMPLES, dir, 'output-with-disableConversionToNumber.json'), 'utf-8'));
+
+		assert.deepStrictEqual(svgParser.parse(input, { disableConversionToNumber: true }), output);
+	});
 });

@@ -5,10 +5,10 @@
 			"type": "element",
 			"tagName": "line",
 			"properties": {
-				"x1": 0,
-				"y1": 1,
-				"x2": 10.2,
-				"y2": 0
+				"x1": "0",
+				"y1": "1",
+				"x2": "10.20",
+				"y2": "0"
 			},
 			"children": []
 		}
