@@ -10,7 +10,11 @@ function repeat(str, i) {
 	return result;
 }
 
-export function parse(source) {
+export function parse(source, options = {}) {
+	const {  
+		disableConversionToNumber = false,
+	} = options;
+
 	let header = '';
 	let stack = [];
 
@@ -168,7 +172,9 @@ export function parse(source) {
 			allowSpaces();
 
 			value = getAttributeValue();
-			if (!isNaN(value) && value.trim() !== '') value = +value; // TODO whitelist numeric attributes?
+			if (!disableConversionToNumber 
+			    && (!isNaN(value) && value.trim() !== '')
+				) value = +value; // TODO whitelist numeric attributes?
 		}
 
 		return { name, value };
