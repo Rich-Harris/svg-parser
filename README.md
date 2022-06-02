@@ -34,6 +34,29 @@ const parsed = parse( `
 }
 */
 ```
+## Options 
+```
+{
+  disableConversionToNumber: boolean (false)
+}
+```
+
+**disableConversionToNumber** (false) - don't try convert value of property to number 
+```
+let svg = `<svg zeroEnd='72.120' big='1234.12345678912345' foo='bar'> </svg>`
+
+const opt = { disableConversionToNumber:true };
+
+const parsedWithOption = parse(svg, opt);
+console.log(parsedWithOption.children[0].properties)
+// { zeroEnd: '72.120', big: '1234.12345678912345', foo: 'bar' }
+const parsed = parse(svg);
+console.log(parsed.children[0].properties)
+//{ zeroEnd: 72.12, big: 1234.1234567891233, foo: 'bar' }
+
+
+
+```
 
 
 ## License
