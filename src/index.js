@@ -12,7 +12,7 @@ function repeat(str, i) {
 
 export function parse(source) {
 	let header = '';
-	let stack = [];
+	const stack = [];
 
 	let state = metadata;
 	let currentElement = null;
