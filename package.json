@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "test": "mocha",
-    "build": "rm -rf dist && rollup -c",
+    "build": "tsdown",
     "pretest": "npm run build",
     "prepublishOnly": "npm run lint && npm test",
     "lint": "oxlint src && oxfmt --check .",
@@ -32,18 +32,42 @@
   "engines": {
     "node": ">=8"
   },
+  "tsdown": {
+    "entry": {
+      "svg-parser": "src/index.js"
+    },
+    "format": {
+      "esm": {
+        "outputOptions": {
+          "entryFileNames": "[name].esm.js"
+        }
+      },
+      "umd": {
+        "globalName": "svgParser",
+        "outputOptions": {
+          "entryFileNames": "[name].umd.js"
+        }
+      }
+    },
+    "platform": "browser",
+    "target": "es2015",
+    "deps": {
+      "onlyBundle": [
+        "locate-character"
+      ]
+    },
+    "sourcemap": true
+  },
   "bugs": {
     "url": "https://github.com/Rich-Harris/svg-parser/issues"
   },
   "homepage": "https://github.com/Rich-Harris/svg-parser#README",
   "devDependencies": {
-    "@rollup/plugin-buble": "^0.21.0",
-    "@rollup/plugin-node-resolve": "^7.0.0",
     "locate-character": "^2.0.5",
     "mocha": "^3.0.1",
     "oxfmt": "^0.64.0",
     "oxlint": "^1.79.0",
-    "rollup": "^1.29.0",
-    "source-map-support": "^0.4.2"
+    "source-map-support": "^0.4.2",
+    "tsdown": "^0.22.14"
   }
 }
