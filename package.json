@@ -28,6 +28,12 @@
     "object"
   ],
   "author": "Rich Harris",
+  "contributors": [
+    {
+      "name": "Bogdan Chadkin",
+      "email": "opensource@trysound.io"
+    }
+  ],
   "license": "MIT",
   "engines": {
     "node": ">=8"
