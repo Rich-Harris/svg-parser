@@ -1,0 +1,22 @@
+{
+	"$schema": "./node_modules/oxlint/configuration_schema.json",
+	"categories": {
+		"correctness": "error"
+	},
+	"rules": {
+		"no-cond-assign": "off",
+		"no-var": "error",
+		"object-shorthand": "error",
+		"one-var": ["error", "never"],
+		"prefer-arrow-callback": "error"
+	},
+	"env": {
+		"es6": true,
+		"browser": true
+	},
+	"globals": {
+		"DEBUG": "writable",
+		"process": "writable",
+		"Buffer": "writable"
+	}
+}
