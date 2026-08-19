@@ -64,7 +64,7 @@
   "homepage": "https://github.com/Rich-Harris/svg-parser#README",
   "devDependencies": {
     "locate-character": "^2.0.5",
-    "mocha": "^7.2.0",
+    "mocha": "^11.8.0",
     "oxfmt": "^0.64.0",
     "oxlint": "^1.79.0",
     "source-map-support": "^0.4.2",
