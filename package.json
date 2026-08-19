@@ -62,6 +62,12 @@
     "url": "https://github.com/Rich-Harris/svg-parser/issues"
   },
   "homepage": "https://github.com/Rich-Harris/svg-parser#README",
+  "overrides": {
+    "debug": "3.2.7",
+    "diff": "3.5.1",
+    "js-yaml": "3.15.1",
+    "minimatch": "3.1.4"
+  },
   "devDependencies": {
     "locate-character": "^2.0.5",
     "mocha": "^7.2.0",
