@@ -13,7 +13,7 @@
 		"test": "mocha",
 		"build": "rm -rf dist && rollup -c",
 		"pretest": "npm run build",
-		"prepublish": "npm run lint && npm test",
+		"prepublishOnly": "npm run lint && npm test",
 		"lint": "oxlint src && oxfmt --check .",
 		"format": "oxfmt --write ."
 	},
