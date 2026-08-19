@@ -33,6 +33,9 @@
   ],
   "author": "Rich Harris",
   "license": "MIT",
+  "engines": {
+    "node": ">=8"
+  },
   "bugs": {
     "url": "https://github.com/Rich-Harris/svg-parser/issues"
   },
