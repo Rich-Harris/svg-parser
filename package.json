@@ -13,13 +13,9 @@
     "test": "mocha",
     "build": "rm -rf dist && rollup -c",
     "pretest": "npm run build",
-    "prepublish": "npm run lint && npm test",
-    "lint": "eslint src"
-  },
-  "prettier": {
-    "singleQuote": true,
-    "useTabs": true,
-    "printWidth": 100
+    "prepublishOnly": "npm run lint && npm test",
+    "lint": "oxlint src && oxfmt --check .",
+    "format": "oxfmt --write ."
   },
   "repository": {
     "type": "git",
@@ -43,10 +39,10 @@
   "devDependencies": {
     "@rollup/plugin-buble": "^0.21.0",
     "@rollup/plugin-node-resolve": "^7.0.0",
-    "eslint": "^3.2.2",
     "locate-character": "^2.0.5",
     "mocha": "^3.0.1",
-    "prettier": "^1.18.2",
+    "oxfmt": "^0.64.0",
+    "oxlint": "^1.79.0",
     "rollup": "^1.29.0",
     "source-map-support": "^0.4.2"
   }

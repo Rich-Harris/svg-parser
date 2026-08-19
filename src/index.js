@@ -28,7 +28,7 @@ export function parse(source) {
 		const snippet = `${beforeLine}${afterLine}\n${repeat(' ', beforeLine.length)}^`;
 
 		throw new Error(
-			`${message} (${line}:${column}). If this is valid SVG, it's probably a bug in svg-parser. Please raise an issue at https://github.com/Rich-Harris/svg-parser/issues – thanks!\n\n${snippet}`
+			`${message} (${line}:${column}). If this is valid SVG, it's probably a bug in svg-parser. Please raise an issue at https://github.com/Rich-Harris/svg-parser/issues – thanks!\n\n${snippet}`,
 		);
 	}
 
@@ -74,7 +74,7 @@ export function parse(source) {
 			type: 'element',
 			tagName,
 			properties: {},
-			children: []
+			children: [],
 		};
 
 		if (currentElement) {
@@ -232,6 +232,6 @@ export function parse(source) {
 	if (root.tagName === 'svg') root.metadata = header;
 	return {
 		type: 'root',
-		children: [root]
+		children: [root],
 	};
 }
