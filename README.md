@@ -111,9 +111,13 @@ Malformed input throws an `Error` with its zero-based line and column location a
 
 ```js
 parse('<svg><path></svg>');
-// Error: Expected closing tag </svg> to match opening tag <path> (0:16).
-// ...source context follows
+// Error: Expected closing tag </svg> to match opening tag <path> (0:16)
+//
+// <svg><path></svg>
+//                 ^
 ```
+
+Source snippets include at most one surrounding line on each side and are cropped to 80 columns. Ellipses indicate omitted content. Empty or whitespace-only input throws `Error: SVG input is empty`.
 
 ## Scope
 

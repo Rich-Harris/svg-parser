@@ -4,13 +4,67 @@ const validNameCharacters = /[a-zA-Z0-9:_-]/;
 const whitespace = /[\s\t\r\n]/;
 const quotemark = /['"]/;
 
+const MAX_SNIPPET_WIDTH = 80;
+const SNIPPET_CONTEXT_LINES = 1;
+
 function repeat(str, i) {
 	let result = '';
 	while (i--) result += str;
 	return result;
 }
 
+function cropLine(line, column) {
+	const expandedLine = line.replace(/\t/g, '  ');
+	const expandedColumn = line.slice(0, column).replace(/\t/g, '  ').length;
+
+	if (expandedLine.length <= MAX_SNIPPET_WIDTH && expandedColumn < MAX_SNIPPET_WIDTH) {
+		return { line: expandedLine, column: expandedColumn };
+	}
+
+	// Reserve room for an ellipsis at each end. Depending on the position,
+	// only one (or neither) may be needed, keeping the result below the limit.
+	const contentWidth = MAX_SNIPPET_WIDTH - 2;
+	const start = Math.max(
+		0,
+		Math.min(expandedColumn - Math.floor(contentWidth / 2), expandedLine.length - contentWidth),
+	);
+	const end = start + contentWidth;
+	const prefix = start > 0 ? '…' : '';
+	const suffix = end < expandedLine.length ? '…' : '';
+
+	return {
+		line: `${prefix}${expandedLine.slice(start, end)}${suffix}`,
+		column: prefix.length + expandedColumn - start,
+	};
+}
+
+function getSnippet(source, line, column) {
+	const lines = source.split('\n');
+	const firstLine = Math.max(0, line - SNIPPET_CONTEXT_LINES);
+	const lastLine = Math.min(lines.length - 1, line + SNIPPET_CONTEXT_LINES);
+	const snippet = [];
+
+	if (firstLine > 0) snippet.push('…');
+
+	for (let lineIndex = firstLine; lineIndex <= lastLine; lineIndex += 1) {
+		const rawLine = lines[lineIndex].replace(/\r$/, '');
+		const cropped = cropLine(rawLine, lineIndex === line ? column : 0);
+		snippet.push(cropped.line);
+
+		if (lineIndex === line) {
+			snippet.push(`${repeat(' ', cropped.column)}^`);
+		}
+	}
+
+	if (lastLine < lines.length - 1) snippet.push('…');
+	return snippet.join('\n');
+}
+
 export function parse(source) {
+	if (!/\S/.test(source)) {
+		throw new Error('SVG input is empty');
+	}
+
 	let header = '';
 	let stack = [];
 
@@ -20,16 +74,9 @@ export function parse(source) {
 
 	function error(message) {
 		const { line, column } = locate(source, i);
-		const before = source.slice(0, i);
-		const beforeLine = /(^|\n).*$/.exec(before)[0].replace(/\t/g, '  ');
-		const after = source.slice(i);
-		const afterLine = /.*(\n|$)/.exec(after)[0];
+		const snippet = getSnippet(source, line, column);
 
-		const snippet = `${beforeLine}${afterLine}\n${repeat(' ', beforeLine.length)}^`;
-
-		throw new Error(
-			`${message} (${line}:${column}). If this is valid SVG, it's probably a bug in svg-parser. Please raise an issue at https://github.com/Rich-Harris/svg-parser/issues – thanks!\n\n${snippet}`,
-		);
+		throw new Error(`${message} (${line}:${column})\n\n${snippet}`);
 	}
 
 	function metadata() {
