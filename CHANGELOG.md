@@ -1,5 +1,12 @@
 # svg-parser changelog
 
+## 2.1.0 (2026-08-23)
+
+- Improve parser errors with concise source context, a caret at the error location, and explicit messages for empty or whitespace-only input ([#61](https://github.com/Rich-Harris/svg-parser/pull/61)).
+- Bound error snippets to 80 columns and one surrounding line on each side, with ellipses marking omitted content.
+- Add `line`, `column`, and `snippet` metadata to parser `Error` objects for programmatic error handling ([#30](https://github.com/Rich-Harris/svg-parser/pull/30)).
+- Remove issue tracker guidance from parser error messages.
+
 ## 2.0.5 (2026-08-19)
 
 **svg-parser is alive again!** After a long quiet period, maintenance has resumed with refreshed tooling and a modern release process.
