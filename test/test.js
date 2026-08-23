@@ -45,6 +45,20 @@ describe('svg-parser', () => {
 		);
 	});
 
+	it('attaches location metadata to parser errors', () => {
+		assert.throws(
+			() => {
+				svgParser.parse('<svg< xmlns=""');
+			},
+			(error) => {
+				assert.strictEqual(error.line, 0);
+				assert.strictEqual(error.column, 4);
+				assert.strictEqual(error.snippet, '<svg< xmlns=""\n    ^');
+				return true;
+			},
+		);
+	});
+
 	it('limits error snippets horizontally', () => {
 		assert.throws(
 			() => {

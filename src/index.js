@@ -76,7 +76,11 @@ export function parse(source) {
 		const { line, column } = locate(source, i);
 		const snippet = getSnippet(source, line, column);
 
-		throw new Error(`${message} (${line}:${column})\n\n${snippet}`);
+		throw Object.assign(new Error(`${message} (${line}:${column})\n\n${snippet}`), {
+			line,
+			column,
+			snippet,
+		});
 	}
 
 	function metadata() {
