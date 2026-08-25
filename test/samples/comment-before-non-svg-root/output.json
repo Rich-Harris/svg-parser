@@ -8,7 +8,7 @@
 			"children": [
 				{
 					"type": "comment",
-					"value": " stuff goes here "
+					"value": " this comment will be loaded as a hast comment node "
 				}
 			]
 		}
