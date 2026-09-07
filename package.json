@@ -7,6 +7,7 @@
   "module": "dist/svg-parser.esm.js",
   "files": [
     "dist",
+    "LICENSE",
     "README.md"
   ],
   "scripts": {

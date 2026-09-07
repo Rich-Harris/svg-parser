@@ -138,4 +138,4 @@ See [SECURITY.md](SECURITY.md) for vulnerability reporting instructions.
 
 ## License
 
-MIT
+[MIT](LICENSE).
