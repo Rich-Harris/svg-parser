@@ -1,0 +1,9 @@
+<?xml version="1.0" standalone="yes"?>
+<!-- pre-root-element comment - will be added to <svg> metadata -->
+<svg xmlns="http://www.w3.org/2000/svg">
+	<!-- this comment will be loaded as a hast comment node -->
+	<path d='M0,0 L10,0 L10,10 L0,10Z'>
+		<!-- this comment contains a <tag> -->
+	</path>
+</svg>
+<!-- post-root-element comment - silently ignored -->
